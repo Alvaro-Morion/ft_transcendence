@@ -9,11 +9,22 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'game/styles.css'%}">
 </head>
-<body, bgcolor='black'>
-<div class="container-fluid game-container">
-    <h1>Pong Game</h1>
-    <canvas id="pongCanvas" width="800" height="400"></canvas>
-</div>
-<script type="module" src="{% static 'game/game.js'%}"></script>
+<body>
+    <div class="container-fluid h-100 d-flex align-items-center justify-content-center game-container">
+        <div class="row">
+            <div class="col-2 text-center d-flex flex-column align-items-center justify-content-center">
+                <img id="player_left_photo" class="player_photo">
+                <h2 id="player_left_name"></h2>
+            </div>
+            <div class="col-8 d-flex align-items-center justify-content-center">
+                <canvas id="pongCanvas" class="border"></canvas>
+            </div>
+            <div class="col-2 text-center d-flex flex-column align-items-center justify-content-center">
+                <img id="player_right_photo", class="player_photo">
+                <h2 id="player_right_name"></h2>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="{% static 'game/game.js'%}"></script>
 </body>
 </html>

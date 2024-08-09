@@ -2,27 +2,27 @@ import Player from "./player.js";
 
 class AIPlayer extends Player
 {
-    //The AI oponent is allways on the right.
-    constructor(position, canvas_height, canvas_width, paddle_height, paddle_width, paddle_speed)
+    //The AI oponent is allways on the left.
+    constructor(position = 0, canvas_height, canvas_width, paddle_height, paddle_width, paddle_speed)
     {
-        super(position, canvas_height, paddle_height, paddle_width, paddle_speed);
+        super(position, canvas_height, paddle_height, paddle_width, paddle_speed, false);
         this.canvas_width = canvas_width;
         this.last_position_calculated = -1;
         this.last_ball_position = [canvas_width/2, canvas_height/2];
         this.predicted_ball_height = this.canvas_height/2;
+        this.name = "Marvin";
+        this.image = "static/image/AI.png"
     }
 
     calculate_next_collision(ball_position, ball_speed)
     {
-        let corrected_position = [ball_position[0], ball_position[1]];
-        let speed = [ball_speed[0], ball_speed[1]];
-        let t = Math.abs(this.x - corrected_position[0])/speed[0];
-        if (speed[0] < 0) //Ball going away.
+        let t = Math.abs(ball_position[0]/ball_speed[0]);
+        if (ball_speed[0] > 0)
         {
-            t = 2*this.canvas_width/speed[0] - t;
+            t = 2*this.canvas_width/ball_speed[0] - t;
         }
-        let h = corrected_position[1] + t*speed[1];
-        this.previous_position = corrected_position;
+        let h = ball_position[1] + t*ball_speed[1];
+        this.previous_position = ball_position;
         while(h > this.canvas_height || h < 0)
         {
             if (h < 0)

@@ -21,10 +21,13 @@ function resizeCanvas() {
     paddleSpeed = canvas.height * 0.02; // 2% of canvas height
 
     // Initial positions
-    player1 = new Player(0, canvas.height, paddleHeight, paddleWidth, paddleSpeed);
-    player2 = new AIPlayer(canvas.width - paddleWidth, canvas.height, canvas.width, paddleHeight, paddleWidth, paddleSpeed);
+    player2 = new Player(canvas.width - paddleWidth, canvas.height, paddleHeight, paddleWidth, paddleSpeed);
+    document.getElementById("player_right_name").innerText = player2.name;
+    player1 = new AIPlayer(0, canvas.height, canvas.width, paddleHeight, paddleWidth, paddleSpeed);
+    document.getElementById("player_left_name").innerText = player1.name;
+    document.getElementById("player_left_photo").src = player1.image;
     
-    resetBall();
+    //resetBall();
 
 }
 
@@ -103,29 +106,14 @@ function move() {
         player1_score++;
         resetBall();
     }
-    player2.calculate_move([ballX, ballY], [ballSpeedX, ballSpeedY]);
+    player1.calculate_move([ballX, ballY], [ballSpeedX, ballSpeedY]);
 }
 
-function gameLoop() {
-    draw();
-    move();
-    requestAnimationFrame(gameLoop);
+function gameLoop(){
+        draw();
+        move();
+        requestAnimationFrame(gameLoop);
 }
-
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowUp') {
-        player1.move(-1);
-    } else if (e.key === 'ArrowDown') {
-        player1.move(1);
-    }
-});
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'w') {
-        player1.move(-1);
-    } else if (e.key === 's') {
-        player1.move(1);
-    }
-});
 
 //Adjust canvas size on window resize
 window.addEventListener('resize', resizeCanvas);
