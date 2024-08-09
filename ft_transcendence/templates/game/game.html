@@ -1,0 +1,19 @@
+<!-- ft_transcendence/templates/game/game.html -->
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'game/styles.css'%}">
+</head>
+<body, bgcolor='black'>
+<div class="container-fluid game-container">
+    <h1>Pong Game</h1>
+    <canvas id="pongCanvas" width="800" height="400"></canvas>
+</div>
+<script type="module" src="{% static 'game/game.js'%}"></script>
+</body>
+</html>
