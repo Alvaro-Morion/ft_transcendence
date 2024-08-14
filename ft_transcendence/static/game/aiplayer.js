@@ -10,6 +10,7 @@ class AIPlayer extends Player
         this.last_position_calculated = -1;
         this.last_ball_position = [this.canvas_width/2, this.canvas_height/2];
         this.predicted_ball_height = this.canvas_height/2;
+        this.isMooving = false;
         this.name = "Marvin";
     }
 
@@ -44,14 +45,30 @@ class AIPlayer extends Player
             this.calculate_next_collision(ball_position, ball_speed);
             this.last_position_calculated = time;
         }
-        if(this.y < this.predicted_ball_height)
+        if (!this.isMooving)
+        {
+            this.isMooving = true;
+            setTimeout(()=> {
+                if(this.y < this.predicted_ball_height)
+                {
+                    this.move(1);
+                }
+                if(this.y > this.predicted_ball_height)
+                {
+                    this.move(-1);
+                }
+                this.isMooving = false
+            }, 250)
+
+        }
+        /*if(this.y < this.predicted_ball_height)
         {
             this.move(1);
         }
         if(this.y > this.predicted_ball_height)
         {
             this.move(-1);
-        }
+        }*/
     }
 }
 

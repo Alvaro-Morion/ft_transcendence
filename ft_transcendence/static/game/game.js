@@ -70,7 +70,7 @@ class Game{
             console.log("left colision")
             this.ball.speedX = -this.ball.speedX + 0.0001*this.canvas.width;
         }
-        else if (this.ball.speedX > 0 && this.ball.x > this.canvas.width -this.ball.size && this.ball.y >= this.player2.y && this.ball.y <= this.player2.y + this.player2.height) 
+        else if (this.ball.speedX > 0 && this.ball.x > this.canvas.width - this.ball.size - this.player2.width && this.ball.y >= this.player2.y && this.ball.y <= this.player2.y + this.player2.height) 
         {
             console.log("right colision")
             this.ball.speedX = -this.ball.speedX - 0.0001*this.canvas.width;
