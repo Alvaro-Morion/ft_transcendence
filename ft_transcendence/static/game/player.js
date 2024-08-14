@@ -1,34 +1,23 @@
 class Player
 {
-    constructor(position, canvas_height, paddle_height, paddle_width, paddle_speed, human=true){
-        this.x = position;
-        this.y = (canvas_height - paddle_height) / 2;
-        this.canvas_height = canvas_height;
-        this.height = paddle_height;
-        this.width = paddle_width;
-        this.speed = paddle_speed;
+    constructor(position, canvas, human = true){
+        this.height = canvas.height *.2;
+        this.width = canvas.width*.02;
+        this.speed = canvas.height*.02;
+        this.canvas_height = canvas.height;
+        this.x = position ? 0 : canvas.width - this.width;
+        this.y = (this.canvas_height - this.height) / 2;
         this.previous_position = this.y;
         this.name = "Human player";
         if(human)
         {
-            this.setListener();
+            this.setListener(position);
         }
     }
 
-    setListener()
+    setListener(position)
     {
-        if(this.x === 0)
-        {
-            document.addEventListener('keydown', function(e)
-            {
-                if (e === 'w')
-                    this.move(-1);
-                if (e === 's')
-                    this.move(1);
-
-            }.bind(this));
-        }
-        else
+        if(!position)
         {
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'ArrowUp') {
@@ -36,6 +25,17 @@ class Player
                 } else if (e.key === 'ArrowDown') {
                     this.move(1);
                 }
+            }.bind(this));
+        }
+        else
+        {
+            document.addEventListener('keydown', function(e)
+            {
+                if (e.key === 'w')
+                    this.move(-1);
+                if (e.key === 's')
+                    this.move(1);
+
             }.bind(this));
         }
     }

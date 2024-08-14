@@ -3,15 +3,14 @@ import Player from "./player.js";
 class AIPlayer extends Player
 {
     //The AI oponent is allways on the left.
-    constructor(position = 0, canvas_height, canvas_width, paddle_height, paddle_width, paddle_speed)
+    constructor(canvas)
     {
-        super(position, canvas_height, paddle_height, paddle_width, paddle_speed, false);
-        this.canvas_width = canvas_width;
+        super(true, canvas, false);
+        this.canvas_width = canvas.width
         this.last_position_calculated = -1;
-        this.last_ball_position = [canvas_width/2, canvas_height/2];
+        this.last_ball_position = [this.canvas_width/2, this.canvas_height/2];
         this.predicted_ball_height = this.canvas_height/2;
         this.name = "Marvin";
-        this.image = "static/image/AI.png"
     }
 
     calculate_next_collision(ball_position, ball_speed)
