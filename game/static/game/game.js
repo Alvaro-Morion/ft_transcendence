@@ -90,7 +90,28 @@ class Game{
     {
         clearInterval(this.gameInterval);
         let name = this.player1_score === 10 ? this.player1.name : this.player2.name
-        alert(name + " won");
+
+        const gameData = {
+            user1: this.player1.name,  // Assuming `id` is set to the Django User ID
+            user2: this.player2.name,  // Null if playing against AI
+            score1: this.player1_score,
+            score2: this.player2_score,
+        };
+
+        fetch('/save-game-result/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(gameData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to save game result');
+            }
+            return response.json();
+        });
+
         document.getElementById("game_mode_menu").classList.remove('d-none');
         document.getElementById("game").classList.add('d-none');
         this.canvas.classList.add('d-none');
